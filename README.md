@@ -1,73 +1,118 @@
-# fake_news_detection
-📰 Fake News Detection Using BERT & Deep Learning
-This project leverages BERT embeddings and a deep learning model built using TensorFlow and Keras to classify news articles as real or fake. It uses a combination of NLP techniques, TF-IDF, and transfer learning to boost classification accuracy.
+# Fake News Detection Using BERT
 
-📌 Key Features
-🔍 Preprocessing: Cleans text, removes stopwords, and generates word clouds
+This repository implements a fake news detection system using a multilingual BERT model fine-tuned on a labeled news dataset. The model classifies news articles as Real or Fake.
 
-📊 EDA: Uses Matplotlib and Seaborn for insightful visualizations
+---
 
-🧠 Modeling:
+## Features
 
-Leverages BERT (Bidirectional Encoder Representations from Transformers) for contextual embeddings
+- Data loading and preprocessing (cleaning, stopword removal, lemmatization)
+- Visualization of dataset distribution and word clouds for real and fake news
+- Tokenization using Hugging Face's `bert-base-multilingual-cased` tokenizer
+- Fine-tuning a BERT-based neural network classifier with TensorFlow/Keras
+- Model evaluation with accuracy, confusion matrix, and classification report
+- Prediction on custom news text (including Hindi)
+- Model interpretability using LIME (Local Interpretable Model-agnostic Explanations)
 
-Builds a custom neural network classifier with dense and dropout layers
+---
 
-🎯 Evaluation: Outputs accuracy, confusion matrix, and classification report
+## Requirements
 
-📈 Visualization: Displays training performance and data distributions
+- Python 3.x
+- TensorFlow
+- Transformers
+- scikit-learn
+- pandas, numpy
+- matplotlib, seaborn
+- nltk
+- wordcloud
+- Pillow (PIL)
+- lime
+- mlxtend
 
-🧾 Requirements
-Install all dependencies using:
+---
 
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Or install manually:
+## Setup Instructions
 
-bash
-Copy
-Edit
-pip install tensorflow transformers sklearn pandas numpy matplotlib seaborn nltk wordcloud pillow
-📂 Project Structure
-bash
-Copy
-Edit
-FakeNews/
-├── FakeNews.py          # Main script for training and evaluation
-├── dataset/             # Folder containing training and test datasets
-├── README.md            # Project overview and instructions
-└── output/              # (Optional) Saved models, plots, and reports
-💻 How to Run
-Clone this repo and navigate to the project directory.
+1. **Mount Google Drive** (if using Google Colab) to access the dataset:
 
-Add your dataset (CSV format with text and label columns) to the dataset/ folder.
+2. **Install required packages:**
 
-Run the script:
-
-bash
-Copy
-Edit
-python FakeNews.py
-You can also run it in Google Colab for GPU acceleration.
-
-📊 Dataset Requirements
-Your dataset should include:
+3. **Download NLTK data:**
 
 
-Column	Description
-text	News article text
-label	0 = Real, 1 = Fake
-📌 Sample Output
-Confusion Matrix
+---
 
-Accuracy Score
+## Dataset
 
-Word Cloud of Most Frequent Words
+- CSV file named `news_dataset.csv` containing news articles labeled as `REAL` or `FAKE`.
+- Remove null values before processing.
 
-Training Loss & Accuracy Graphs
+---
 
-✍️ Author
-Created by Your Name — feel free to connect or contribute!
+## Data Preprocessing
+
+- Clean text by removing URLs, special characters, punctuation, and converting to lowercase.
+- Remove stopwords and apply lemmatization using NLTK.
+- Encode labels (`REAL` → 1, `FAKE` → 0).
+
+---
+
+## Tokenization
+
+- Use `BertTokenizer` from Hugging Face with `bert-base-multilingual-cased`.
+- Maximum sequence length set to 128 tokens.
+- Tokenize text data with padding and truncation.
+
+---
+
+## Training
+
+- Split data into train and test sets (80% train, 20% test).
+- Train model for 5 epochs with batch size 32.
+- Use 20% of training data as validation.
+
+---
+
+## Evaluation
+
+- Evaluate accuracy on test data.
+- Plot confusion matrix and print classification report.
+
+---
+
+---
+
+## Explainability with LIME
+
+- Install LIME:
+
+- Use `LimeTextExplainer` to explain predictions on sample texts.
+
+---
+
+## File Structure
+
+- `FakeNews.py` — main script with full pipeline (data loading, preprocessing, training, evaluation, prediction).
+- `news_dataset.csv` — dataset file (should be placed in the specified directory).
+
+---
+
+## Notes
+
+- The model supports multilingual news articles, including Hindi.
+- The trained model is saved as `bert.pkl` using pickle.
+- Visualization includes accuracy/loss plots and word clouds.
+
+---
+
+## References
+
+- Hugging Face Transformers: `bert-base-multilingual-cased`
+- LIME for interpretability
+- Dataset source: news_dataset.csv
+
+---
+
+Feel free to clone this repo and run the notebook/script to train and test the fake news detection model.
 
